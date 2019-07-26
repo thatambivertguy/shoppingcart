@@ -49,13 +49,10 @@ const users=db.define('users',{
 })
 
 
-const addtocart=db.define('addtocart',{
+const cart=db.define('cart',{
     username:{
         type:sequelize.STRING
     },
-    // id:{
-    //     type:sequelize.STRING   
-    // },
     name:{
         type:sequelize.STRING,
     },
@@ -72,7 +69,12 @@ const addtocart=db.define('addtocart',{
     },
     Image:{
         type:sequelize.STRING
-    }
+    },
+    quantity:{
+        type:sequelize.FLOAT,
+        allowNull:false,
+        defaultValue:1,
+    },
 
 })
 
@@ -81,5 +83,5 @@ const addtocart=db.define('addtocart',{
 
 
 module.exports={
-    db,users,products,addtocart
+    db,users,products,cart
 }

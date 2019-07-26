@@ -24,6 +24,7 @@ function refreshComplete(items){
           console.log("click wokringggg")
         const abcd =($(this).parent()[0].innerText).split('\n')[0]
         console.log(abcd)
+        console.log($(this).parent()[0].innerText)
         $.post('/tobeaddedtocart',{name:abcd},function(data){
              console.log(data)
              

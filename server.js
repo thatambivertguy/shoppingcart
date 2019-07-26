@@ -1,8 +1,9 @@
 const express=require('express')
 const app=express()
-const {db,users,products,addtocart}=require('./db')
+const {db,users,products,cart}=require('./db')
 const ProductRoute=require('./products')
 const UsersRoute=require('./users')
+
 
 app.use(express.json())
 app.use(express.urlencoded(({extended:true})))
@@ -24,12 +25,14 @@ app.post('/tobeaddedtocart',(req,res)=>{
     }).then((item)=>{
         // console.log(item)
         // console.log(item.dataValues)
-        addtocart.create(item.dataValues).then(cartitem=>{
+        cart.create(item.dataValues).then(cartitem=>{
             res.json(cartitem)
         })   
     })
 })
-
+app.get('/mycart',(req,res)=>{
+    res.render('cart')
+})
 app.get('/prod',(req,res)=>{
     products.findAll().then((all)=>{
         res.send(all)
@@ -37,10 +40,11 @@ app.get('/prod',(req,res)=>{
 })
 
 app.get('/addtocart',(req,res)=>{
-    addtocart.findAll().then((all)=>{
+    cart.findAll().then((all)=>{
         res.send(all)
     })
 })
+
 
 
 app.get('/',(req,res)=>{

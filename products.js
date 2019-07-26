@@ -1,5 +1,5 @@
 const route=require('express').Router()
-const {db,users,products,addtocart}=require('./db')
+const {db,users,products,cart}=require('./db')
 
 
 route.get('/',(req,res)=>{
@@ -20,8 +20,8 @@ route.post('/',(req,res)=>{
         
         res.render('products')
     })}
-    else{window.alert('Kindly fill all the field to add')
-        res.render('add')
+    else{this.alert('Kindly fill all the field to add')
+        res.render('add',)
     }
 })
 
