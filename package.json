@@ -1,0 +1,19 @@
+{
+  "name": "cart-updated",
+  "version": "1.0.0",
+  "description": "",
+  "main": "db.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "hbs": "^4.0.4",
+    "popups": "^1.1.3",
+    "sequelize": "^5.10.2",
+    "sqlite3": "^4.0.9"
+  }
+}
