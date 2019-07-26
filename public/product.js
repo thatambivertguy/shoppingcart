@@ -21,10 +21,11 @@ function refreshComplete(items){
             <p class="card-body">&nbsp;${i.price}</p>
             <p class="card-footer">${i.manufacturer}</p>`)
       var del = $("<button class='btn btn-primary' id='addtocart'>Add to Cart</button>").click(function(e){
-          console.log("click wokringggg")
+          // console.log("click wokringggg")
         const abcd =($(this).parent()[0].innerText).split('\n')[0]
-        console.log(abcd)
-        console.log($(this).parent()[0].innerText)
+        // console.log(abcd)
+        // console.log($(this).parent()[0].innerText)
+        window.alert('item added to the cart')
         $.post('/tobeaddedtocart',{name:abcd},function(data){
              console.log(data)
              

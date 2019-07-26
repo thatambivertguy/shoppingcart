@@ -54,6 +54,7 @@ const cart=db.define('cart',{
         type:sequelize.STRING
     },
     name:{
+        primaryKey :true,
         type:sequelize.STRING,
     },
     manufacturer:{

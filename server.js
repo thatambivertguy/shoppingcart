@@ -24,12 +24,33 @@ app.post('/tobeaddedtocart',(req,res)=>{
         }
     }).then((item)=>{
         // console.log(item)
-        // console.log(item.dataValues)
-        cart.create(item.dataValues).then(cartitem=>{
+        console.log(item.dataValues.name)
+  
+    cart.create(item.dataValues).then(cartitem=>{
             res.json(cartitem)
-        })   
+        }).catch(()=>{
+            cart.findAll({where:{name :item.dataValues.name}}).then(r=>{
+                console.log(r)
+               cart.increment('quantity',{where:{name : item.dataValues.name}})
+            })
+        }) 
     })
 })
+
+// app.get('/upsert',(req,res)=>{
+//     cart.upsert({
+//         name : 'abc',
+//         quantity : quantity+1,
+//     }).then((t)=>{
+//         console.log(t)
+//     })
+// })
+
+// app.get('/incr',(req,res)=>{
+//     // Model.increment('number', { where: { foo: 'bar' });
+//  cart.increment('quantity',{where:{name : 'abc'}})
+// })
+
 app.get('/mycart',(req,res)=>{
     res.render('cart')
 })
@@ -45,7 +66,11 @@ app.get('/addtocart',(req,res)=>{
     })
 })
 
-
+app.post('/delcart',(req,res)=>{
+    cart.destroy({where : {name :req.body.name}}).then(t=>{
+        res.sendStatus(200)
+    })
+})
 
 app.get('/',(req,res)=>{
     res.render('products')
