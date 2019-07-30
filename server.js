@@ -1,5 +1,8 @@
 const express=require('express')
 const app=express()
+const multer =require('multer')
+const path =require('path')
+const fs=require('fs')
 const {db,users,products,cart}=require('./db')
 const ProductRoute=require('./products')
 const UsersRoute=require('./users')
@@ -13,8 +16,32 @@ app.use('/',express.static(__dirname+'/public'))
 app.use('/products',ProductRoute)
 app.use('/users',UsersRoute)
 
+const uploadFolder = "./uploads";
+if (!fs.existsSync(uploadFolder)) {
+    fs.mkdirSync(uploadFolder);
+  }
+  
+  var storage = multer.diskStorage({
+    destination: function(req, file, callback) {
+      callback(null, uploadFolder);
+    },
+    filename: function(req, file, callback) {
+      callback(null, Date.now() + path.extname(file.originalname));
+    }
+  });
+  
+  var upload = multer({ storage: storage });
+  
 
-
+app.post('/decquant',(req,res)=>{
+    // Model.decrement('number', { where: { foo: 'bar' });
+    cart.decrement('quantity',{where :{name:req.body.name}})
+    cart.findAll({where :{name:req.body.name}}).then(t=>{
+        console.log(t[0].dataValues.quantity)
+        
+        res.sendStatus(parseInt(t[0].dataValues.quantity))
+    })
+})
 
 
 app.post('/tobeaddedtocart',(req,res)=>{

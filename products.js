@@ -1,5 +1,24 @@
 const route=require('express').Router()
 const {db,users,products,cart}=require('./db')
+const multer =require('multer')
+const path =require('path')
+const fs=require('fs')
+
+const uploadFolder = "./uploads";
+if (!fs.existsSync(uploadFolder)) {
+    fs.mkdirSync(uploadFolder);
+  }
+  
+  var storage = multer.diskStorage({
+    destination: function(req, file, callback) {
+      callback(null, uploadFolder);
+    },
+    filename: function(req, file, callback) {
+      callback(null, Date.now() + path.extname(file.originalname));
+    }
+  });
+  
+  var upload = multer({ storage: storage });
 
 
 route.get('/',(req,res)=>{
@@ -9,13 +28,16 @@ route.get('/',(req,res)=>{
 })
 
 //to add a new product into database
-route.post('/',(req,res)=>{
+route.post('/',upload.single("prod_image"),(req,res)=>{
      if((req.body.name !="")&&(req.body.manufacturer !="")&&(req.body.price !="")){
-    products.create({
+      console.log(req.file.filename)
+      console.log(req.filename) 
+        products.create({
         name:req.body.name,
         manufacturer:req.body.manufacturer,
         price:req.body.price,
-        type:req.body.type
+        type:req.body.type,
+        Image : req.file.filename
     }).then((users)=>{
         
         res.render('products')

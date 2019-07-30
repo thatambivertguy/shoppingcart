@@ -58,7 +58,7 @@
 
     <div class="row mt-5">
       <div class="col-4">
-      <form action="/products" method="POST">
+      <form action="/products" method="POST" enctype="multipart/form-data">
   <div class="form-group">
     <label for="name">Name of Product</label>
     <input type="text" class="form-control" id="name" name="name" aria-describedby="name-help" placeholder="Enter name of product">
@@ -76,7 +76,11 @@
     <label for="type">Type of the Product</label>
     <input type="text" class="form-control" id="type" name="type" placeholder="Enter the type of the product">
   </div>
-  <button type="submit" class="btn btn-primary">Add the product</button>
+        <div class="form-group">
+    <label for="prod_image">Image of the product</label>
+    <input type="file" class="form-control" id="prod_image" name="prod_image" placeholder="upload image" >
+  </div>
+   <button type="submit" class="btn btn-primary">Add the product</button>
 </form>
 
 </div>
