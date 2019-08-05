@@ -16,7 +16,7 @@ app.use('/',express.static(__dirname+'/public'))
 app.use('/products',ProductRoute)
 app.use('/users',UsersRoute)
 
-const uploadFolder = "./uploads";
+const uploadFolder = "./public/uploads";
 if (!fs.existsSync(uploadFolder)) {
     fs.mkdirSync(uploadFolder);
   }

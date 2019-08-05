@@ -13,9 +13,9 @@ $(()=>{
 function refreshComplete(items){
     items.forEach(i=>{
         console.log(i)
-      var item = $(`<div class="col-2 mx-3 pt-2">
+      var item = $(`<div class="col-2 mx-3 pt-2" style="height:500px">
         <div class="card" style="width:200px">
-          <img class="card-img-top" src="iphone.jpeg" alt="iphone x" style="width:50%">
+          <img class="card-img-top" src="/uploads/${i.Image}" alt="iphone x" style="width:50% align="middle"">
           <div class="card-body">
             <h4 class="card-header">${i.name}</h4>
             <p class="card-body">&nbsp;${i.price}</p>

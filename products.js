@@ -4,7 +4,7 @@ const multer =require('multer')
 const path =require('path')
 const fs=require('fs')
 
-const uploadFolder = "./uploads";
+const uploadFolder = "./public/uploads";
 if (!fs.existsSync(uploadFolder)) {
     fs.mkdirSync(uploadFolder);
   }
